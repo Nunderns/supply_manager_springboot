@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Manager System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            color: #000;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo i {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #000;
+            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .api-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .api-section h3 {
+            color: #2d3748;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .quick-access-item {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .quick-access-item:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quick-access-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .quick-access-item strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .quick-access-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .api-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: #000;
+        }
+
+        .api-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .api-item i {
+            color: #667eea;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .api-item strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .api-item code {
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+        }
+
+        .admin-section {
+            background: linear-gradient(135deg, #fef5e7 0%, #fce4d6 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #f6d55c;
+        }
+
+        .admin-section h3 {
+            color: #d69e2e;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .admin-credentials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .credential-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #d69e2e;
+        }
+
+        .credential-item strong {
+            color: #2d3748;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .credential-item span {
+            color: #000;
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #000;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .api-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-credentials {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-warehouse"></i>
+        </div>
+        
+        <h1>Supply Manager System</h1>
+        <p class="subtitle">Sistema de gerenciamento de suprimentos construído com Spring Boot</p>
+        
+        <div class="api-section">
+            <h3><i class="fas fa-tachometer-alt"></i> Acesso Rápido</h3>
+            <div class="quick-access-grid">
+                <a href="/products.html" class="quick-access-item">
+                    <i class="fas fa-box"></i>
+                    <strong>Produtos</strong>
+                    <p>Gerenciar estoque e cadastro de produtos</p>
+                </a>
+                <a href="/categories.html" class="quick-access-item">
+                    <i class="fas fa-tags"></i>
+                    <strong>Categorias</strong>
+                    <p>Organizar produtos por categorias</p>
+                </a>
+                <a href="/suppliers.html" class="quick-access-item">
+                    <i class="fas fa-truck"></i>
+                    <strong>Fornecedores</strong>
+                    <p>Gerenciar fornecedores e contatos</p>
+                </a>
+                <a href="/users.html" class="quick-access-item">
+                    <i class="fas fa-users"></i>
+                    <strong>Usuários</strong>
+                    <p>Controle de acesso e permissões</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="api-section">
+            <h3><i class="fas fa-code"></i> Endpoints da API Disponíveis</h3>
+            <div class="api-grid">
+                <div class="api-item">
+                    <i class="fas fa-box"></i>
+                    <strong>Produtos:</strong> <code>/api/products/*</code>
+                </div>
+                <div class="api-item">
+                    <i class="fas fa-tags"></i>
+                    <strong>Categorias:</strong> <code>/api/categories/*</code>
+                </div>
+                <div class="api-item">
+                    <i class="fas fa-truck"></i>
+                    <strong>Fornecedores:</strong> <code>/api/suppliers/*</code>
+                </div>
+                <div class="api-item">
+                    <i class="fas fa-users"></i>
+                    <strong>Usuários:</strong> <code>/api/users/*</code>
+                </div>
+                <div class="api-item">
+                    <i class="fas fa-database"></i>
+                    <strong>Console H2:</strong> <code>/h2-console</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <h3><i class="fas fa-user-shield"></i> Usuário Admin Padrão</h3>
+            <div class="admin-credentials">
+                <div class="credential-item">
+                    <strong>Usuário:</strong>
+                    <span>admin</span>
+                </div>
+                <div class="credential-item">
+                    <strong>Senha:</strong>
+                    <span>admin123</span>
+                </div>
+                <div class="credential-item">
+                    <strong>Email:</strong>
+                    <span>admin@supplymanager.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><i class="fas fa-code-branch"></i> Desenvolvido com Spring Boot, Spring Security, e H2 Database</p>
+        </div>
+    </div>
+</body>
+</html>
